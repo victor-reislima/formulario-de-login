@@ -1,0 +1,77 @@
+//IMPORTAÇÕES
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+// CORES PARA ARMONIA DO PROJETO
+$dodger-blue: #1E90FF;
+$cobalt-blue: #0047AB;
+$lightsky-blue: #87CEFA;
+$quase-preto: #333333;
+$ghost-white: #F8F8FF;
+
+
+//TAMANHO PARA BOX
+$login-wd: 300px;
+$login-hg: 175px;
+$rad-b: 15px;
+$rad-t: 15px;
+$sign-wd: 500px;
+$sign-hg: 200px;
+$bwh: 100%;
+
+//ALINHAR/FIXAR
+$alg: center;
+$blk: block;
+$at: auto;
+$cnt: center;
+$flx: flex;
+
+//mixins
+@mixin text-input{
+    display: $blk;
+    margin: 10px $at;
+    width: 100%;
+    height: 30px;
+    border-radius: $rad-t;
+    color: black;
+    background-color: $lightsky-blue;
+    font-family: Raleway, sans-serif;
+}
+
+
+//INICIO DO CÓDIGO
+
+*{
+    border: none;
+    margin: none;
+    background-color: $cobalt-blue;
+}
+
+body{
+    width: $bwh;
+    height: $bwh;
+}
+
+.user-b{
+    margin: 250px $at;
+    padding: 25px 50px;
+    max-width: 200px;
+    border-radius: $rad-b;
+    text-align: $cnt;
+    background-color: $dodger-blue;
+    color: black;
+    outline: none;
+}
+
+::placeholder{
+    color: black;
+    border: none;
+    outline: none;
+}
+
+h3{
+    background-color: $dodger-blue
+}
+
+input{
+    @include text-input();
+}
