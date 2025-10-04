@@ -1,77 +1,128 @@
-//IMPORTAÇÕES
+//==================================================
+// IMPORTAÇÕES
+//==================================================
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
-// CORES PARA ARMONIA DO PROJETO
+//==================================================
+// VARIÁVEIS BASE
+//==================================================
+
+// CORES PARA HARMONIA DO PROJETO
 $dodger-blue: #1E90FF;
 $cobalt-blue: #0047AB;
 $lightsky-blue: #87CEFA;
 $quase-preto: #333333;
 $ghost-white: #F8F8FF;
 
+// TAMANHOS E MEDIDAS (Preferência por REM)
+$base-font-size: 16px; // Fonte base para cálculo de REM
+$spacing-sm: 0.5rem;   // 8px
+$spacing-md: 1rem;     // 16px
+$spacing-lg: 1.5rem;   // 24px
+$rad-base: 0.9375rem;  // 15px em REM
+$rad-base-top: $rad-base;
+$rad-base-bottom: $rad-base;
+$input-height: 1.875rem; // 30px em REM
 
-//TAMANHO PARA BOX
-$login-wd: 300px;
-$login-hg: 175px;
-$rad-b: 15px;
-$rad-t: 15px;
-$sign-wd: 500px;
-$sign-hg: 200px;
-$bwh: 100%;
+// BREAKPOINTS (Para Media Queries)
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 900px;
 
-//ALINHAR/FIXAR
+// UTILITÁRIOS
 $alg: center;
 $blk: block;
 $at: auto;
 $cnt: center;
 $flx: flex;
+$bwh: 100%;
 
-//mixins
-@mixin text-input{
+//==================================================
+// MIXINS
+//==================================================
+
+@mixin text-input {
     display: $blk;
-    margin: 10px $at;
+    margin: $spacing-md $at; // Margem responsiva
     width: 100%;
-    height: 30px;
-    border-radius: $rad-t;
-    color: black;
+    height: $input-height;
+    padding: 0 $spacing-sm; // Padding para melhor usabilidade
+    border-radius: $rad-base-top;
+    color: $quase-preto;
     background-color: $lightsky-blue;
     font-family: Raleway, sans-serif;
+    font-size: $spacing-md; // Fonte em REM
+    box-sizing: border-box; // Garante que padding não aumente a largura
 }
 
-
-//INICIO DO CÓDIGO
-
-*{
-    border: none;
-    margin: none;
-    background-color: $cobalt-blue;
-}
-
-body{
+@mixin screen-center {
+    display: $flx;
+    justify-content: $cnt;
+    align-items: $cnt;
+    min-height: 100vh; // Garante que o container use a altura total da viewport
     width: $bwh;
-    height: $bwh;
 }
 
-.user-b{
-    margin: 250px $at;
-    padding: 25px 50px;
-    max-width: 200px;
-    border-radius: $rad-b;
+//==================================================
+// INÍCIO DO CÓDIGO BASE
+//==================================================
+
+* {
+    border: none;
+    margin: 0; // Reset de margem melhorado
+    padding: 0; // Reset de padding
+    box-sizing: border-box; // Fundamental para layouts responsivos
+    // A cor de fundo global aqui pode ser problemática, 
+    // é melhor definir a cor de fundo no <body>
+    // background-color: $cobalt-blue; 
+}
+
+html {
+    font-size: $base-font-size; // Define o REM para 16px
+}
+
+body {
+    @include screen-center; // Centraliza o conteúdo (o box de login) na tela
+    background-color: $cobalt-blue; // Cor de fundo do corpo
+}
+
+.user-b {
+    // A largura máxima será relativa à viewport (vw) ou um valor fixo em REM
+    // garantindo que ocupe a maior parte da tela em dispositivos menores.
+    max-width: 90vw; // Ocupa até 90% da largura da tela
+    width: 25rem;    // Largura padrão: 400px (25 * 16px). Se o `max-width` for menor, ele prevalece.
+    padding: $spacing-lg $spacing-lg; // Padding em REM
+    border-radius: $rad-base-bottom;
     text-align: $cnt;
     background-color: $dodger-blue;
-    color: black;
+    color: $quase-preto;
     outline: none;
+    box-shadow: 0 0.5rem 1rem rgba($quase-preto, 0.2); // Sombra para profundidade
+    
+    // Media Query para telas menores (smartphones)
+    @media (max-width: $breakpoint-mobile) {
+        width: 18rem; // Um pouco menor para telas bem pequenas (ex: 288px)
+        padding: $spacing-md; 
+    }
 }
 
-::placeholder{
-    color: black;
-    border: none;
-    outline: none;
+::placeholder {
+    color: $quase-preto;
+    opacity: 0.8; // Torna um pouco transparente
 }
 
-h3{
-    background-color: $dodger-blue
+h3 {
+    // Herda a cor de fundo do `.user-b` para evitar repetição,
+    // mas se for estritamente necessário:
+    background-color: $dodger-blue; 
+    font-size: 1.5rem; // Tamanho de fonte em REM
+    margin-bottom: $spacing-lg;
+    color: $ghost-white;
 }
 
-input{
+input {
     @include text-input();
 }
+
+//==================================================
+// FIM DO CÓDIGO
+//==================================================
